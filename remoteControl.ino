@@ -7,6 +7,10 @@
 #endif
 #include <SPI.h>
 
+int 
+  pinR = 9,
+  pinL = 10;
+
 USB Usb;
 //USBHub Hub1(&Usb); // Some dongles have a hub inside
 
@@ -25,6 +29,8 @@ void setup() {
     while (1); //halt
   }
   Serial.print(F("\r\nPS3 Bluetooth Library Started"));
+  pinMode(pinR, OUTPUT);
+  pinMode(pinL, OUTPUT);
 }
 void loop() {
   Usb.Task();
@@ -51,6 +57,9 @@ void loop() {
     Serial.println(vL);
     Serial.print("vR: ");
     Serial.println(vR);
+
+    analogWrite(pinR, vR);
+    analogWrite(pinL, vL);
 
 
     delay(100);
